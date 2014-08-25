@@ -49,7 +49,8 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
     <service android:name="com.kii.cloud.analytics.EventUploadService" />
     ```
 7. Create custom application class and add the following code to the `onCreate()` method to initialize the Cubeacon SDK.
-    ```xml
+    ```java
+    @Override
     public void onCreate() {
         super.onCreate();
         // Cubeacon SDK Initialization
