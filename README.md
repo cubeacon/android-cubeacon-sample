@@ -20,7 +20,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
 
 ## Cubeacon SDK Installation ##
 1. Register to KiiCloud first using this [guide][KiiCloud].
-2. Download `KiiCloudStorageSDK-xxx.jar` and `KiiAnalyticsSDK-xxx.jar`.
+2. Download `KiiCloudStorageSDK-xxx.jar` and `KiiAnalyticsSDK-xxx.jar` from [Kii Developer Page][KiiCloudDev].
 3. Register to [Cubeacon SaaS][CubeaconSaaS] and download `CubeaconSDK-Android-xxx.zip`.
 4. Extract `CubeaconSDK-Android-xxx.zip`, copy `Cubeacon.properties` to the root of your project's Java `src` source folder.
 5. Then copy `KiiCloudStorageSDK-xxx.jar`, `KiiAnalyticsSDK-xxx.jar` and `CuBeacon.jar` to your `libs` directory.
@@ -140,3 +140,4 @@ Then, on main activity of your apps :
 [JavaDoc]:http://docs.cubeacon.com/sdk/android/references/index.html
 [Issue]:https://github.com/cubeacon/android-cubeacon-sample/issues
 [KiiCloud]:http://docs.cubeacon.com/saas/signup-kii/
+[KiiCloudDev]:https://developer.kii.com/
