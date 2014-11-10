@@ -5,27 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.eyro.cubeacon.CB.RefreshBeaconCallback;
 import com.eyro.cubeacon.CBApp;
 
 public class SplashActivity extends Activity {
-    
-    private TextView txtLoading;
-    
+
+    private TextView	txtLoading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         txtLoading = (TextView) findViewById(R.id.txtProgressBarSplash);
 
-        CBApp.refreshBeacon(new CBApp.RefreshBeacon() {
-
+        txtLoading.setText("Initializing Cubeacon");
+        CBApp.refreshBeaconInBackground(this, new RefreshBeaconCallback() {
+            
             @Override
-            public void onBeforeRefresh() {
-                txtLoading.setText("Initializing Cubeacon");
-            }
-
-            @Override
-            public void onAfterRefresh(String arg0) {
+            public void onRefreshCompleted() {
                 Intent intent = new Intent(SplashActivity.this,
                         MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

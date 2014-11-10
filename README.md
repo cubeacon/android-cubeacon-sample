@@ -19,12 +19,10 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
  - [Provide us Comments][Issue]
 
 ## Cubeacon SDK Installation ##
-1. Register to KiiCloud first using this [guide][KiiCloud].
-2. Download `KiiCloudStorageSDK-xxx.jar` and `KiiAnalyticsSDK-xxx.jar` from [Kii Developer Page][KiiCloudDev].
-3. Register to [Cubeacon SaaS][CubeaconSaaS] and download `CubeaconSDK-Android-xxx.zip`.
-4. Extract `CubeaconSDK-Android-xxx.zip`, copy `Cubeacon.properties` to the root of your project's Java `src` source folder.
-5. Then copy `KiiCloudStorageSDK-xxx.jar`, `KiiAnalyticsSDK-xxx.jar` and `CuBeacon.jar` to your `libs` directory.
-6. Add following permissions and service declaration to your `AndroidManifest.xml`:
+1. Register to [Cubeacon SaaS][CubeaconSaaS] and download `CubeaconSDK-Android-xxx.zip`.
+2. Extract `CubeaconSDK-Android-xxx.zip`, copy `Cubeacon.properties` to the root of your project's Java `src` source folder.
+3. Then copy `CuBeacon-xxx.jar` to your `libs` directory.
+4. Add following permissions and service declaration to your `AndroidManifest.xml`:
 
     ```xml
     <!-- Needed permissions in order to connect to internet. -->
@@ -57,87 +55,63 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
         CBApp.setup(this, "Cubeacon.properties");
     }
     ```
-    Don't forget to initialize your custom class to `AndroidManifest.xml`
+    Don't forget to initialize your custom application class to `AndroidManifest.xml`
 
-    (Optional) You can enable Cubeacon SDK debug logging by calling `CBApp.enableDebugLogging(true)`.
+    (Optional) You can add some custom setup :
+    * Enable Cubeacon SDK debug logging when on development mode by calling `CBApp.enableDebugLogging(true)`.
+    * Enable download image brohure on local path by calling `CBapp.enableDownloadImage(true)`.
 
 ## Usage and Demos ##
 You can import `Cubeacon SDK Demos` that located in this repo to your ADT. After initialization, you must download all beacon data from Cloud first.
 
 Quick start to download cloud data :
 ```java
-CBApp.refreshBeacon(new CBApp.RefreshBeacon() {
+CBApp.refreshBeaconInBackground(new CB.RefreshBeacon() {
     @Override
-    public void onBeforeRefresh() {
-        // do something before download started
-        // like showing a splashscreen or progressbar
-    }
-    
-    @Override
-    public void onAfterRefresh(String arg0) {
+    public void onRefreshCompleted() {
         // do something after download complete
         // like showing main screen of your app
     }
 });
 ```
-(Info) `CBApp.refreshBeacon` are implemented using background `AsyncTask` method.
+(Info) `CBApp.refreshBeaconInBackground` are implemented using background `AsyncTask` method.
 
-Then, on main activity of your apps :
+Then, extends your activity that used for detected beacon to `CBActivity` class and implement all abstract method :
 ```java
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // create Cubeacon SDK Service
-        CBApp.createService(this);
-        setContentView(R.layout.activity_main);
-        // set beacon listener of Cubeacon SDK
-        CBApp.setBeaconListener(this, new CBApp.BeaconListener() {
-            
-            @Override
-            public void onExit(CBBeacon beacon, long timeInterval) {
-                // do something when beacon exited region
-            }
-            
-            @Override
-            public void onEnter(CBBeacon beacon) {
-                // do something when beacon entered region
-            }
-            
-            @Override
-            public void onChange(CBBeacon old, CBBeacon current) {
-                // do something when nearest beacon changed
-            }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        // starting Cubeacon SDK service
-        CBApp.startService(this);
-        super.onStart();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // call onActivityResult to Cubeacon SDK
-        CBApp.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onDestroy() {
-        // destroy Cubeacon SDK service
-        CBApp.destroyService(this);
-        super.onDestroy();
+    public class MainActivity extends CBActivity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+        }
+    
+        @Override
+        protected void onBeaconExited(CBBeacon beacon, long timeInterval) {
+            // do something when beacon exited region
+        }
+    
+        @Override
+        protected void onBeaconEntered(CBBeacon beacon) {
+            // do something when beacon entered region
+        }
+    
+        @Override
+        protected void onBeaconChanged(CBBeacon old, CBBeacon current) {
+            // do something when nearest beacon changed
+        }
     }
 ```
 
 ## Changelog ##
+* 1.0.0 (November 10, 2014)
+  - Add new base CBActivity class
+  - Add kill switch based on monthly API call usage
+  - Combine all required library into a jar library file
+  - Fix automatic background and foreground scanning
+  - Fix some bugs
 * 0.5.0 (August 25, 2014)
   - Initial release
 
 [CubeaconSaaS]:http://developer.cubeacon.com
 [JavaDoc]:http://docs.cubeacon.com/sdk/android/references/index.html
 [Issue]:https://github.com/cubeacon/android-cubeacon-sample/issues
-[KiiCloud]:http://docs.cubeacon.com/saas/signup-kii/
-[KiiCloudDev]:https://developer.kii.com/

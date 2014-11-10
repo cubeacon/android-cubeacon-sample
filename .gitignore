@@ -1,0 +1,7 @@
+.classpath
+.project
+.settings/
+bin/
+libs/
+project.properties
+src/CubeaconDev.properties
