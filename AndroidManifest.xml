@@ -7,6 +7,9 @@
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="21" />
+    
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <!-- Needed permissions in order to connect to internet. -->
     <uses-permission android:name="android.permission.INTERNET" />

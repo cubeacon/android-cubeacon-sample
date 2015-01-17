@@ -25,6 +25,10 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
 4. Add following permissions and service declaration to your `AndroidManifest.xml`:
 
     ```xml
+    <!-- Needed permissions in order to generate meta users. -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    
     <!-- Needed permissions in order to connect to internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -68,7 +72,7 @@ Quick start to download cloud data :
 ```java
 CBApp.refreshBeaconInBackground(new CB.RefreshBeacon() {
     @Override
-    public void onRefreshCompleted() {
+    public void onRefreshCompleted(boolean result, String messages) {
         // do something after download complete
         // like showing main screen of your app
     }
@@ -96,19 +100,54 @@ Then, extends your activity that used for detected beacon to `CBActivity` class 
         }
     
         @Override
-        protected void onBeaconChanged(CBBeacon old, CBBeacon current) {
+        protected void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
             // do something when nearest beacon changed
+            if(current.getStoryline().equals(Storyline.IMAGE)){
+                // display a brochure image
+            }else if(current.getStoryline().equals(Storyline.TEXT)){
+                // show text alert/notification
+            }else if(current.getStoryline().equals(Storyline.HTML)){
+                // show html page via webview
+            }else if(current.getStoryline().equals(Storyline.URL)){
+                // open url in a webview/browser
+            }else if(current.getStoryline().equals(Storyline.VIDEO)){
+                // play a video streaming
+            }
+        }
+        
+        @Override
+        protected void onBeaconEmpty() {
+            // do something when no beacon detected
         }
     }
 ```
 
+### Meta Users ###
+By improving analytics usage and user engagement, Cubeacon SDK enhanced with `Meta User` module. This module is optional. So if you want to get user informations like `fullname` and `email`, show a form with 2 textinput and you can save into cloud like this :
+
+```java
+    CBUser.setUserData("User fullname", "User valid email");
+    CBUser.currentUser().sendDataInBackground(new Callback() {
+        @Override
+        public void onCompleted(Exception exp) {
+            if (exp == null)
+                // show succesfull message
+            else
+                // show error message by exp.getMessage()
+        }
+    });
+```
+
 ## Changelog ##
+* 1.2.0 (January 17, 2015)
+  - Add meta user for analytics
+  - Comply with current Cubeacon SaaS v1.2.0
 * 1.0.0 (November 10, 2014)
   - Add new base CBActivity class
-  - Add kill switch based on monthly API call usage
-  - Combine all required library into a jar library file
+  - Improve stability
+  - Comply with current Cubeacon SaaS v1.0.0
+  - Combine all required library into single file
   - Fix automatic background and foreground scanning
-  - Fix some bugs
 * 0.5.0 (August 25, 2014)
   - Initial release
 

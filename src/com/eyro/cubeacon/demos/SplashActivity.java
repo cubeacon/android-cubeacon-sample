@@ -22,7 +22,7 @@ public class SplashActivity extends Activity {
         CBApp.refreshBeaconInBackground(this, new RefreshBeaconCallback() {
             
             @Override
-            public void onRefreshCompleted() {
+            public void onRefreshCompleted(boolean arg0, String arg1) {
                 Intent intent = new Intent(SplashActivity.this,
                         MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

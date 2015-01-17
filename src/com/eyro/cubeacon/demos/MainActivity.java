@@ -8,11 +8,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.eyro.cubeacon.CB.Storyline;
 import com.eyro.cubeacon.CBActivity;
 import com.eyro.cubeacon.CBBeacon;
 
@@ -91,9 +93,25 @@ public class MainActivity extends CBActivity {
     }
 
     @Override
-    protected void onBeaconChanged(CBBeacon old, CBBeacon current) {
+    protected void onBeaconEmpty() {
         // TODO Auto-generated method stub
-        //main.setBackground(Drawable.createFromPath(current.getBrochureLocalPath()));
+        main.setBackground(new ColorDrawable(android.R.color.transparent));
+    }
+
+    @Override
+    protected void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
+        // TODO Auto-generated method stub
+        if(current.getStoryline().equals(Storyline.IMAGE)){
+            // TODO Show brochure image
+        }else if(current.getStoryline().equals(Storyline.TEXT)){
+            // TODO Show text alert
+        }else if(current.getStoryline().equals(Storyline.HTML)){
+            // TODO Show html via webview
+        }else if(current.getStoryline().equals(Storyline.URL)){
+            // TODO Open url in a webview/browser
+        }else if(current.getStoryline().equals(Storyline.VIDEO)){
+            // TODO Play a video streaming
+        }
         Log.i(tag, current.getName() + " changed, major: " + current.getMajor() + ", minor: " + current.getMinor());
     }
 }
