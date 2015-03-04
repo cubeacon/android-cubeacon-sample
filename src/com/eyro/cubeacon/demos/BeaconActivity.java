@@ -18,7 +18,7 @@ public class BeaconActivity extends Activity {
         String path = bundle.getString(MainActivity.EXTRA_INTENT);
         
         ImageView image = (ImageView) findViewById(R.id.beacon_brochure);
-        image.setImageDrawable(Drawable.createFromPath(path));;
+        image.setImageDrawable(Drawable.createFromPath(path));
     }
 
     @Override

@@ -14,9 +14,9 @@ import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.eyro.cubeacon.CB.Storyline;
 import com.eyro.cubeacon.CBActivity;
 import com.eyro.cubeacon.CBBeacon;
+import com.eyro.cubeacon.CBConstant.CBCampaignType;
 
 public class MainActivity extends CBActivity {
     String                     tag             = "MainActivity";
@@ -80,38 +80,58 @@ public class MainActivity extends CBActivity {
     }
 
     @Override
-    protected void onBeaconExited(CBBeacon beacon, long timeInterval) {
+    protected void onExitedBeacon(CBBeacon beacon, long timeInterval) {
         // TODO Auto-generated method stub
         Log.i(tag, beacon.getName() + " exited, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor());
     }
 
     @Override
-    protected void onBeaconEntered(CBBeacon beacon) {
+    protected void onEnteredBeacon(CBBeacon beacon) {
         // TODO Auto-generated method stub
-        showNotif(beacon.getName() + " entered region", beacon.getBrochureUrl());
         Log.i(tag, beacon.getName() + " entered, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor());
     }
 
     @Override
-    protected void onBeaconEmpty() {
+    protected void onEmptyBeacon() {
         // TODO Auto-generated method stub
         main.setBackground(new ColorDrawable(android.R.color.transparent));
     }
 
     @Override
     protected void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
+        openCampaign(current);
+        Log.i(tag, current.getName() + " changed, major: " + current.getMajor() + ", minor: " + current.getMinor());
+    }
+    
+    @Override
+    protected void onImmediateBeacon(CBBeacon beacon) {
+        openCampaign(beacon);
+        Log.i(tag, beacon.getName() + " on immediate proximity, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor());
+    }
+    
+    @Override
+    protected void onNearBeacon(CBBeacon beacon) {
+        openCampaign(beacon);
+        Log.i(tag, beacon.getName() + " on near proximity, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor());
+    }
+    
+    @Override
+    protected void onFarBeacon(CBBeacon beacon) {
+        openCampaign(beacon);
+        Log.i(tag, beacon.getName() + " on far proximity, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor());
+    }
+    
+    private void openCampaign(CBBeacon beacon) {
+        CBCampaignType campaign = beacon.getStoryline().getCampaign();
         // TODO Auto-generated method stub
-        if(current.getStoryline().equals(Storyline.IMAGE)){
+        if(campaign.equals(CBCampaignType.IMAGE)){
             // TODO Show brochure image
-        }else if(current.getStoryline().equals(Storyline.TEXT)){
-            // TODO Show text alert
-        }else if(current.getStoryline().equals(Storyline.HTML)){
+        }else if(campaign.equals(CBCampaignType.HTML)){
             // TODO Show html via webview
-        }else if(current.getStoryline().equals(Storyline.URL)){
+        }else if(campaign.equals(CBCampaignType.URL)){
             // TODO Open url in a webview/browser
-        }else if(current.getStoryline().equals(Storyline.VIDEO)){
+        }else if(campaign.equals(CBCampaignType.VIDEO)){
             // TODO Play a video streaming
         }
-        Log.i(tag, current.getName() + " changed, major: " + current.getMajor() + ", minor: " + current.getMinor());
     }
 }

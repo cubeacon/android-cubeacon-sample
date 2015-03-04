@@ -9,7 +9,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
 
   - Integrating with Cubeacon SaaS
   - Scanning any beacons on a foreground UI or on background as a service
-  - Showing alert (foreground) or notifications (background) when any beacons entered region (onEnter), exited region (onExit) and nearest detected (onChange)
+  - Showing alert (foreground) or notifications (background) when any beacons entered region (onEnter), exited region (onExit), nearest detected (onChange), onImmediate beacon, onNear beacon and onFar detected beacon.
   - Showing scenario based on beacons detected
   - Sending analytic to Cubeacon SaaS
 
@@ -22,7 +22,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
 1. Register to [Cubeacon SaaS][CubeaconSaaS] and download `CubeaconSDK-Android-xxx.zip`.
 2. Extract `CubeaconSDK-Android-xxx.zip`, copy `Cubeacon.properties` to the root of your project's Java `src` source folder.
 3. Then copy `CuBeacon-xxx.jar` to your `libs` directory.
-4. Add following permissions and service declaration to your `AndroidManifest.xml`:
+4. Add following permissions, activity and service declaration to your `AndroidManifest.xml`:
 
     ```xml
     <!-- Needed permissions in order to generate meta users. -->
@@ -31,6 +31,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
     
     <!-- Needed permissions in order to connect to internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Needed permissions in order to scan for beacons. -->
@@ -42,8 +43,14 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
     ```
-    
+    In application tag, add this lines of code :
     ```xml
+    <!-- Storyline activity responsible to show campaign alert/ notification -->
+    <activity 
+        android:name="com.eyro.cubeacon.StorylineActivity"
+        android:configChanges="orientation|screenSize">
+    </activity>
+        
     <!-- Cubeacon service responsible for scanning beacons. -->
     <service android:name="com.eyro.cubeacon.CBService" 
         android:exported="false" />
@@ -70,7 +77,7 @@ You can import `Cubeacon SDK Demos` that located in this repo to your ADT. After
 
 Quick start to download cloud data :
 ```java
-CBApp.refreshBeaconInBackground(new CB.RefreshBeacon() {
+CBApp.refreshBeaconInBackground(new CBConstant.RefreshBeacon() {
     @Override
     public void onRefreshCompleted(boolean result, String messages) {
         // do something after download complete
@@ -119,6 +126,21 @@ Then, extends your activity that used for detected beacon to `CBActivity` class 
         protected void onBeaconEmpty() {
             // do something when no beacon detected
         }
+        
+        @Override
+        protected void onImmediateBeacon(CBBeacon beacon) {
+            // do something when beacon proximity are immediate
+        }
+        
+        @Override
+        protected void onNearBeacon(CBBeacon beacon) {
+            // do something when beacon proximity are near
+        }
+        
+        @Override
+        protected void onFarBeacon(CBBeacon beacon) {
+            // do something when beacon proximity are far
+        }
     }
 ```
 
@@ -139,8 +161,14 @@ By improving analytics usage and user engagement, Cubeacon SDK enhanced with `Me
 ```
 
 ## Changelog ##
+* 1.3.0 (February 28, 2015)
+  - New storyline with custom campaign like showing Image, Video, Url web page and HTML formatted content.
+  - New analytic data based new storyline
+  - Comply with current Cubeacon SaaS v1.3.0
+  - Support Android 5.0 Lollipop
 * 1.2.0 (January 17, 2015)
   - Add meta user for analytics
+  - Add storyline for beacon scenario
   - Comply with current Cubeacon SaaS v1.2.0
 * 1.0.0 (November 10, 2014)
   - Add new base CBActivity class
