@@ -44,6 +44,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
         android:required="true" />
     ```
     In application tag, add this lines of code :
+    
     ```xml
     <!-- Storyline activity responsible to show campaign alert/ notification -->
     <activity 
@@ -52,10 +53,12 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
     </activity>
         
     <!-- Cubeacon service responsible for scanning beacons. -->
-    <service android:name="com.eyro.cubeacon.CBService" 
+    <service 
+        android:name="com.eyro.cubeacon.CBService" 
         android:exported="false" />
     <!-- Service that responsible to send Analytic data -->
-    <service android:name="com.kii.cloud.analytics.EventUploadService" />
+    <service 
+        android:name="com.kii.cloud.analytics.EventUploadService" />
     ```
 7. Create custom application class and add the following code to the `onCreate()` method to initialize the Cubeacon SDK.
     ```java
@@ -146,7 +149,6 @@ Then, extends your activity that used for detected beacon to `CBActivity` class 
 
 ### Meta Users ###
 By improving analytics usage and user engagement, Cubeacon SDK enhanced with `Meta User` module. This module is optional. So if you want to get user informations like `fullname` and `email`, show a form with 2 textinput and you can save into cloud like this :
-
 ```java
     CBUser.setUserData("User fullname", "User valid email");
     CBUser.currentUser().sendDataInBackground(new Callback() {
@@ -161,6 +163,9 @@ By improving analytics usage and user engagement, Cubeacon SDK enhanced with `Me
 ```
 
 ## Changelog ##
+* 1.3.1 (April 18, 2015)
+  - Fix optional parameter when downloading data from cloud
+  - Add control to URL WebView Activity
 * 1.3.0 (February 28, 2015)
   - New storyline with custom campaign like showing Image, Video, Url web page and HTML formatted content.
   - New analytic data based new storyline

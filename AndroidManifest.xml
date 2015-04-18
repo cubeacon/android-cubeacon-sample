@@ -47,6 +47,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
+		<activity 
+		    android:name="com.eyro.cubeacon.StorylineActivity"
+		    android:label="@string/app_name"
+		    android:screenOrientation="portrait">
+		</activity>        
 
         <!-- Cubeacon service responsible for scanning beacons. -->
         <service
