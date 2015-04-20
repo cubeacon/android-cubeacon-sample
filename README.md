@@ -111,16 +111,15 @@ Then, extends your activity that used for detected beacon to `CBActivity` class 
     
         @Override
         protected void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
+            CBCampaignType campaign = current.getStoryline().getCampaign();
             // do something when nearest beacon changed
-            if(current.getStoryline().equals(Storyline.IMAGE)){
+            if(campaign.equals(CBCampaignType.IMAGE)){
                 // display a brochure image
-            }else if(current.getStoryline().equals(Storyline.TEXT)){
-                // show text alert/notification
-            }else if(current.getStoryline().equals(Storyline.HTML)){
+            }else if(campaign.equals(CBCampaignType.HTML)){
                 // show html page via webview
-            }else if(current.getStoryline().equals(Storyline.URL)){
+            }else if(campaign.equals(CBCampaignType.URL)){
                 // open url in a webview/browser
-            }else if(current.getStoryline().equals(Storyline.VIDEO)){
+            }else if(campaign.equals(CBCampaignType.VIDEO)){
                 // play a video streaming
             }
         }
