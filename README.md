@@ -25,13 +25,16 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
 4. Add following permissions, activity and service declaration to your `AndroidManifest.xml`:
 
     ```xml
-    <!-- Needed permissions in order to generate meta users. -->
+    <!-- Needed permissions in order to generate meta users data -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    
+
     <!-- Needed permissions in order to connect to internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
+    <!-- Needed permissions in order to read and write to external storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Needed permissions in order to scan for beacons. -->

@@ -8,11 +8,16 @@
         android:minSdkVersion="18"
         android:targetSdkVersion="21" />
     
+    <!-- Needed permissions in order to generate meta users data -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <!-- Needed permissions in order to connect to internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
+    <!-- Needed permissions in order to read and write to external storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Needed permissions in order to scan for beacons. -->
