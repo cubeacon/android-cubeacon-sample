@@ -19,7 +19,7 @@ public class BeaconActivity extends Activity {
 		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         
         ImageView image = (ImageView) findViewById(R.id.beacon_brochure);
-        image.setImageDrawable(Drawable.createFromPath(path));
+        image.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_compass));
     }
 
     @Override
