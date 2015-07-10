@@ -15,7 +15,8 @@ public class BeaconActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         
         Bundle bundle = getIntent().getExtras();
-        String path = bundle.getString(MainActivity.EXTRA_INTENT);
+        String message = bundle.getString(MainActivity.EXTRA_INTENT);
+		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         
         ImageView image = (ImageView) findViewById(R.id.beacon_brochure);
         image.setImageDrawable(Drawable.createFromPath(path));

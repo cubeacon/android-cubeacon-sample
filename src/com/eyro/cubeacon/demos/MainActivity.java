@@ -25,7 +25,7 @@ public class MainActivity extends CBActivity {
     ScrollView                 main;
     static NotificationManager notificationManager;
     static final int           NOTIFICATION_ID = 123456;
-    public static final String EXTRA_INTENT    = "NOTIFICATION";
+    public static final String EXTRA_INTENT    = "MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,11 @@ public class MainActivity extends CBActivity {
     @Override
     protected void onEnteredBeacon(CBBeacon beacon) {
         // TODO Auto-generated method stub
-        Log.i(tag, beacon.getName() + " entered, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor());
+		String message = beacon.getName() + " entered, major: " + beacon.getMajor() + ", minor: " + beacon.getMinor();
+        Log.i(tag, message);
+		Intent intent = new Intent(this, BeaconActivity.class);
+		intent.putExtra(MainActivity.EXTRA_INTENT, message);
+		startActivity(intent);
     }
 
     @Override
