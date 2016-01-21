@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Cubeacon Demos</string>
+    <string name="splash_text">Loading data...</string>
+
+    <!-- Uncomment lines bellow to custom the alert notification -->
+    <!--<string name="cubeacon_alert_title_url">URL Campaign</string>-->
+    <!--<string name="cubeacon_alert_message_url">You've got an URL campaign on [%s], open it now?</string>-->
+    <!--<string name="cubeacon_alert_positive_button_url">Yes, Open URL</string>-->
+    <!--<string name="cubeacon_alert_negative_button_url">No, Close</string>-->
+
+    <!--<string name="cubeacon_alert_title_video">Video Campaign</string>-->
+    <!--<string name="cubeacon_alert_message_video">You've got an Video campaign on [%s], play it now?</string>-->
+    <!--<string name="cubeacon_alert_positive_button_video">Yes, Play Video</string>-->
+    <!--<string name="cubeacon_alert_negative_button_video">No, Close</string>-->
+</resources>

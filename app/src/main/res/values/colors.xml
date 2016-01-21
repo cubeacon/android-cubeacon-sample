@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#005982</color>
+    <color name="colorPrimaryDark">#003b57</color>
+    <color name="colorAccent">@color/cubeacon_blue_light</color>
+
+    <color name="cubeacon_blue_dark">#0077AE</color>
+    <color name="cubeacon_blue_light">#0095DA</color>
+
+    <!-- Uncomment this line to change color of notification icon -->
+    <!--<color name="cubeacon_notification_icon_color">#0095DA</color>-->
+</resources>
