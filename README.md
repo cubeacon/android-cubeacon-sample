@@ -23,6 +23,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
 2. Extract `CubeaconSDK-Android-xxx.zip`, copy `Cubeacon.properties` to the root of your project's Java `assets` folder.
 3. Then copy `CubeaconSDK-xxx.aar` to your `libs` directory.
 4. On your `build.gradle` within `app` module, add this lines below before `dependencies` tag
+    
     ```
     repositories{
         flatDir {
@@ -30,6 +31,7 @@ Cubeacon SDK for Android is a library to allow interaction with any beacons. The
         }
     }
     ```
+    
     Then add `compile 'com.eyro.cubeacon:CubeaconSDK:1.5.0@aar'` into your `dependecies`.
 5. Create custom application class and add the following code to the `onCreate()` method to initialize the Cubeacon SDK.
     ```java
