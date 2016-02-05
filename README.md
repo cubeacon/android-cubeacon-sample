@@ -80,18 +80,7 @@ Then, extends your activity that used for detected beacon to `CBAppCompatActivit
         @Override
         public void onEnterBeacon(CBBeacon beacon) {
             // do something when beacon entered region
-        }
-
-        @Override
-        public void onExitBeacon(CBBeacon beacon, long timeInterval) {
-            // do something when beacon exited region
-        }
-
-        @Override
-        public void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
-            CBCampaignType campaign = current.getStoryline().getCampaign();
-
-            // do something when nearest beacon changed
+            CBCampaignType campaign = beacon.getStoryline().getCampaign();
             if (campaign == CBCampaignType.IMAGE) {
                 // display a brochure image
             } else if(campaign == CBCampaignType.HTML) {
@@ -101,6 +90,16 @@ Then, extends your activity that used for detected beacon to `CBAppCompatActivit
             } else if(campaign == CBCampaignType.VIDEO) {
                 // play a video streaming
             }
+        }
+
+        @Override
+        public void onExitBeacon(CBBeacon beacon, long timeInterval) {
+            // do something when beacon exited region
+        }
+
+        @Override
+        public void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
+            // do something when nearest beacon changed
         }
 
         @Override

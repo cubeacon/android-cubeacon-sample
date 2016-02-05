@@ -38,6 +38,17 @@ public class MainActivity extends CBAppCompatActivity {
     @Override
     public void onEnterBeacon(CBBeacon beacon) {
         // do something when beacon entered region
+        CBCampaignType campaign = beacon.getStoryline().getCampaign();
+
+        if(campaign.equals(CBCampaignType.IMAGE)){
+            // display a brochure image
+        } else if(campaign.equals(CBCampaignType.HTML)){
+            // show html page via webview
+        } else if(campaign.equals(CBCampaignType.URL)){
+            // open url in a webview/browser
+        } else if(campaign.equals(CBCampaignType.VIDEO)){
+            // play a video streaming
+        }
     }
 
     @Override
@@ -47,17 +58,7 @@ public class MainActivity extends CBAppCompatActivity {
 
     @Override
     public void onNearestBeaconChanged(CBBeacon old, CBBeacon current) {
-        CBCampaignType campaign = current.getStoryline().getCampaign();
         // do something when nearest beacon changed
-        if(campaign.equals(CBCampaignType.IMAGE)){
-            // display a brochure image
-        }else if(campaign.equals(CBCampaignType.HTML)){
-            // show html page via webview
-        }else if(campaign.equals(CBCampaignType.URL)){
-            // open url in a webview/browser
-        }else if(campaign.equals(CBCampaignType.VIDEO)){
-            // play a video streaming
-        }
     }
 
     @Override
