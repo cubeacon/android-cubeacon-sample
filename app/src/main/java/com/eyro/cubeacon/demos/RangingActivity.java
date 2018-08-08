@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public class RangingActivity extends AppCompatActivity implements CBRangingListener, CBServiceListener, AdapterView.OnItemClickListener {
 
@@ -99,7 +100,7 @@ public class RangingActivity extends AppCompatActivity implements CBRangingListe
     for (CBBeacon beacon : beacons) {
       title = beacon.getProximityUUID().toString().toUpperCase();
       subtitle = String.format(Locale.getDefault(), "M:%d m:%d RSSI:%d Accuracy:%.2fm",
-          beacon.getMinor(), beacon.getMinor(), beacon.getRssi(), beacon.getAccuracy());
+          beacon.getMajor(), beacon.getMinor(), beacon.getRssi(), beacon.getAccuracy());
       map = new HashMap<>();
       map.put("title", title);
       map.put("subtitle", subtitle);
@@ -124,7 +125,8 @@ public class RangingActivity extends AppCompatActivity implements CBRangingListe
     cubeacon.addRangingListener(this);
     try {
       // create a new region for ranging beacons
-      CBRegion region = new CBRegion("com.eyro.cubeacon.ranging_region");
+      CBRegion region = new CBRegion("com.eyro.cubeacon.ranging_region",
+          UUID.fromString("cb10023f-a318-3394-4199-a8730c7c1aec"), 1234, 5678);
       // start ranging beacons using region
       cubeacon.startRangingBeaconsInRegion(region);
     } catch (RemoteException e) {

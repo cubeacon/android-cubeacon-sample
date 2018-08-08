@@ -40,7 +40,7 @@ public class App extends Application implements CBBootstrapListener {
     // setup region scanning when OS boot completed
     CBBootstrapRegion.setup(this,
         new CBRegion("com.eyro.cubeacon.bootstrap_region",
-            UUID.fromString("cb10023f-a318-3394-4199-a8730c7c1aec")));
+            UUID.fromString("cb10023f-a318-3394-4199-a8730c7c1aec"), 1234, 5678));
   }
 
   public void showNotification(String title, String message) {
